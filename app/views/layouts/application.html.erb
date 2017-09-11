@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Audovare</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+    <header>
+      <% if can? :manage, User %>
+      	<p>Visible only for superadmins and supervisors! </p>
+      <% end %>
+      <%# if current_user.superadmin_role? || current_user.supervisor_role? %>
+      	<!-- <p>Visible only for superadmins and supervisors! </p> -->
+      <%# end %>
+      <% if user_signed_in? %>
+        <div class="">
+          <%= link_to('Home', root_url) %> |
+          <%= link_to('Invitation', invitation_hello_path) %> |
+          <%= link_to('Edit registration', edit_user_registration_path) %> |
+          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> |  Hello <%= current_user.email %>
+        </div>
+      <% else %>
+        <div class="">
+          <%= link_to('Register', new_user_registration_path)  %> |
+          <%= link_to('Login', new_user_session_path)  %>
+        </div>
+
+      <% end %>
+
+    </header>
+    <div class="">
+      <div class="">
+        <% unless flash.empty? %>
+         <script type="text/javascript">
+          <% flash.each do |f| %>
+  	      <% type = f[0].to_s.gsub('alert', 'error').gsub('notice', 'info') %>
+  	     	 toastr['<%= type %>']('<%= f[1] %>');
+  	      <% end %>
+         </script>
+        <% end %>
+      </div>
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+    </div>
+    <%= yield %>
+  </body>
+</html>
