@@ -8,29 +8,35 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <header>
-      <% if can? :manage, User %>
-      	<p>Visible only for superadmins and supervisors! </p>
-      <% end %>
-      <%# if current_user.superadmin_role? || current_user.supervisor_role? %>
-      	<!-- <p>Visible only for superadmins and supervisors! </p> -->
-      <%# end %>
-      <% if user_signed_in? %>
-        <div class="">
-          <%= link_to('Home', root_url) %> |
-          <%= link_to('Invitation', invitation_hello_path) %> |
-          <%= link_to('Edit registration', edit_user_registration_path) %> |
-          <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> |  Hello <%= current_user.email %>
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">/\\\ Audovare</a>
         </div>
-      <% else %>
-        <div class="">
-          <%= link_to('Register', new_user_registration_path)  %> |
-          <%= link_to('Login', new_user_session_path)  %>
-        </div>
-
-      <% end %>
-
-    </header>
+        <% if can? :manage, User %>
+          <ul class="nav navbar-nav navbar">
+              <li> <%= link_to('Admin Dash', '/admin') %> </li>
+          </ul>
+        <% end %>
+        <% if user_signed_in? %>
+          <ul class="nav navbar-nav navbar">
+              <li> <%= link_to('Home', root_url) %> </li>
+              <li> <%= link_to('Invitation', invitation_hello_path) %> </li>
+              <li> <%= link_to('Requests', requests_path) %> </li>
+              <li> <%= link_to('Edit registration', edit_user_registration_path) %> </li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li class=""><a> Hello <%= current_user.email %> </a></li>
+            <li> <%= link_to('Logout', destroy_user_session_path, :method => :delete) %> </li>
+          </ul>
+        <% else %>
+        <ul class="nav navbar-nav navbar-right">
+          <li> <%= link_to ' Register', new_user_registration_path, :class => 'glyphicon glyphicon-user' %> </li>
+          <li> <%= link_to ' Login', new_user_session_path, :class => 'glyphicon glyphicon-log-in' %> </li>
+        </ul>
+        <% end %>
+      </div>
+    </nav>
     <div class="">
       <div class="">
         <% unless flash.empty? %>
