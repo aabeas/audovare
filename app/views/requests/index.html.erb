@@ -1,0 +1,22 @@
+<h1>Listing Requests</h1>
+
+<%= link_to 'New request', new_request_path %>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Synopsis</th>
+  </tr>
+
+  <% @requests.each do |request| %>
+    <tr>
+      <td><%= request.title %></td>
+      <td><%= request.synopsis %></td>
+      <td><%= link_to 'Show', request_path(request) %>|</td>
+      <td><%= link_to 'Edit', edit_request_path(request) %>|</td>
+      <td><%= link_to 'Destroy', request_path(request),
+              method: :delete,
+              data: { confirm: 'Confirm Delete?' } %></td>
+    </tr>
+  <% end %>
+</table>

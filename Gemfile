@@ -11,7 +11,7 @@ end
 gem 'rails', '~> 5.1.3'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.18'
-gem 'activerecord-session_store'
+# gem 'activerecord-session_store'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

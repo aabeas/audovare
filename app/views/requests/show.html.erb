@@ -1,0 +1,14 @@
+<h1>Request List</h1>
+
+<p>
+  <strong>Title:</strong>
+  <%= @request.title %>
+</p>
+
+<p>
+  <strong>Synopsis:</strong>
+  <%= @request.synopsis %>
+</p>
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>
