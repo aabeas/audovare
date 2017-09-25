@@ -6,12 +6,14 @@
   <tr>
     <th>Title</th>
     <th>Synopsis</th>
+    <th>Requestor</th>
   </tr>
 
   <% @requests.each do |request| %>
     <tr>
       <td><%= request.title %></td>
       <td><%= request.synopsis %></td>
+      <td><%= request.user.email%></td>
       <td><%= link_to 'Show', request_path(request) %>|</td>
       <td><%= link_to 'Edit', edit_request_path(request) %>|</td>
       <td><%= link_to 'Destroy', request_path(request),

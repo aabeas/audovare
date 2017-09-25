@@ -4,10 +4,11 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Welcome, <%= @user.email %></h1>
-    <p>
-      Access to app under following URL: <%= @url %>.
-    </p>
-    <p>Thanks for joining and have a great day!</p>
+    <div>
+      <h1>Welcome <%= @user.email %>!</h1>
+      <p>You have successfully signed up to Audovare.com, your username is: <%= @user.email %>.</p>
+      <p>To access the app, just follow this link: <%= @url %>.</p>
+      <p>Thanks for joining and have a great day!</p>
+    </div>
   </body>
 </html>

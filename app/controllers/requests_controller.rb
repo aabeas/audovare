@@ -3,23 +3,33 @@ class RequestsController < ApplicationController
   skip_before_action :authenticate_user!
 
   def index
-    @requests = Request.all
+    @requests = current_user.requests
   end
 
+  # def admin_index
+  #   if current_user.superadmin_role?
+  #     @requests = Request.requests
+  #   else
+  #     redirect_to requests_path
+  #   end
+  # end
+
   def show
-    @request = Request.find(params[:id])
+    @request = current_user.requests.find(params[:id])
   end
 
   def new
-    @request = Request.new
+    @request = current_user.requests.new
   end
 
   def edit
-    @request = Request.find(params[:id])
+    @request = current_user.requests.find(params[:id])
   end
 
   def create
-    @request = Request.new(request_params)
+    @request = current_user.requests.new(request_params)
+
+      # @request.user_id = current_user.id
 
     if @request.save
       redirect_to @request
@@ -29,7 +39,7 @@ class RequestsController < ApplicationController
   end
 
   def update
-    @request = Request.find(params[:id])
+    @request = current_user.requests.find(params[:id])
 
     if @request.update(request_params)
       redirect_to @request
@@ -39,7 +49,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    @request = Request.find(params[:id])
+    @request = current_user.requests.find(params[:id])
     @request.destroy
 
     redirect_to requests_path
